@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Header from '@components/Header';
 import UserInfoForm from '@components/UserInfoForm';
 import CandidateComparison from '@components/CandidateComparison';
-import Footer from '@components/Footer';
+// import Footer from '@components/Footer';
 import MoreInfo from '@components/MoreInfo';
 import CalculationDetails from '@components/CalculationDetails';
 import ContactMe from '@components/ContactMe';

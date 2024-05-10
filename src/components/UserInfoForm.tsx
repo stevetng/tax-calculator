@@ -41,7 +41,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-64 bg-gray-100 p-4 flex-1 md:flex md:flex-col text-black rounded rounded-r-none">
+    <form onSubmit={handleSubmit} className="space-y-4 bg-gray-100 p-4 flex-1 md:flex md:flex-col text-black rounded rounded-r-none sm:flex-row sm:max-w-full sm:w-full">
         <h2 className="text-lg font-semibold text-black">Enter Your Information</h2>
         <p className="text-sm text-black">See the impacts of each candidate's policies on your household.</p>
         <hr className="solid"></hr>
@@ -88,7 +88,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
                     type="number"
                     id="age"
                     name="age"
-                    value={age}
+                    value={Number(age).toLocaleString('en-US')}
                     onChange={(e) => setAge(e.target.value)}
                     min="18" // Set minimum age requirement for example
                     required // Makes the field mandatory
@@ -103,7 +103,8 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
             type="number"
             id="dependents"
             name="dependents"
-            value={dependents}
+            value={Number(dependents).toLocaleString('en-US')}
+            min={0}
             onChange={(e) => setDependents(e.target.value)}
             required
             className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -117,7 +118,8 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
             type="number"
             id="students"
             name="students"
-            value={students}
+            value={Number(students).toLocaleString('en-US')}
+            min={0}
             onChange={(e) => setStudents(e.target.value)}
             required
             className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
