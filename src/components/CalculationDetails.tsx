@@ -3,7 +3,7 @@ import React from 'react';
 
 const CalculationDetails: React.FC = () => {
     return (
-          <div id="CalculationDetails" className="container text-black mx-auto px-4 md:px-6 lg:px-8">
+          <div id="CalculationDetails" className="container text-black mx-auto py-12 px-4 md:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl">
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold tracking-tight md:text-4xl">How The Tax Impact Was Calculated</h2>

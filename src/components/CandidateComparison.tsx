@@ -24,21 +24,21 @@ interface Candidate {
 
 const taxBrackets = {
     single: [
-      { upperBound: 9525, rate: 0.10 },
-      { upperBound: 38700, rate: 0.12 },
-      { upperBound: 82500, rate: 0.22 },
-      { upperBound: 157500, rate: 0.24 },
-      { upperBound: 200000, rate: 0.32 },
-      { upperBound: 500000, rate: 0.35 },
+      { upperBound: 11600, rate: 0.10 },
+      { upperBound: 47150, rate: 0.12 },
+      { upperBound: 100525, rate: 0.22 },
+      { upperBound: 191950, rate: 0.24 },
+      { upperBound: 243725, rate: 0.32 },
+      { upperBound: 609350, rate: 0.35 },
       { upperBound: Infinity, rate: 0.37 },
     ],
     marriedFilingJointly: [
-      { upperBound: 19050, rate: 0.10 },
-      { upperBound: 77400, rate: 0.12 },
-      { upperBound: 165000, rate: 0.22 },
-      { upperBound: 315000, rate: 0.24 },
-      { upperBound: 400000, rate: 0.32 },
-      { upperBound: 600000, rate: 0.35 },
+      { upperBound: 23200, rate: 0.10 },
+      { upperBound: 94300, rate: 0.12 },
+      { upperBound: 201050, rate: 0.22 },
+      { upperBound: 383900, rate: 0.24 },
+      { upperBound: 487450, rate: 0.32 },
+      { upperBound: 731200, rate: 0.35 },
       { upperBound: Infinity, rate: 0.37 },
     ],
     // Add other filing statuses (head of household, etc.) as needed

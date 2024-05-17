@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Header from '@components/Header';
 import UserInfoForm from '@components/UserInfoForm';
 import CandidateComparison from '@components/CandidateComparison';
+import TaxBracket from '@components/taxBracket';
 // import Footer from '@components/Footer';
 import MoreInfo from '@components/MoreInfo';
 import CalculationDetails from '@components/CalculationDetails';
@@ -39,6 +40,7 @@ const Home: React.FC = () => {
         <UserInfoForm onSubmit={handleUserInfoSubmit} />
           <CandidateComparison userInfo={userInfo} />
         </div>
+        <TaxBracket />
         <MoreInfo />
         <CalculationDetails />
       </main>

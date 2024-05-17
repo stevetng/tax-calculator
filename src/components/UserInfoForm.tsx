@@ -43,7 +43,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 bg-gray-100 p-4 flex-1 md:flex md:flex-col text-black rounded rounded-r-none sm:flex-row sm:max-w-full sm:w-full">
         <h2 className="text-lg font-semibold text-black">Enter Your Information</h2>
-        <p className="text-sm text-black">See the impacts of each candidate's policies on your household.</p>
+        <p className="text-sm text-black">See the impact of each candidate's policies on your household.</p>
         <hr className="solid"></hr>
         <fieldset>
             <legend className="text-base font-medium text-gray-900">Filing Status</legend>
