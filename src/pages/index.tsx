@@ -35,7 +35,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header />
-      <main className='bg-white h-full w-full p-10'>
+      <main className='bg-white h-full w-full p-6 md:p-10'>
         <div className='flex flex-col md:flex-row max-w-5xl mx-auto w-full h-full border-gray-400 border border-t- rounded shadow'>
         <UserInfoForm onSubmit={handleUserInfoSubmit} />
           <CandidateComparison userInfo={userInfo} />
