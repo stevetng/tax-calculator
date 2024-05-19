@@ -92,7 +92,7 @@ const CandidateComparison: React.FC<{ userInfo: UserInfo }> = ({ userInfo }) => 
       {candidates.map((candidate) => {
         const impacts = candidate.calculatePolicyImpact(userInfo);
         return (
-          <div key={candidate.id} className="flex-1 md:flex md:flex-col bg-gray-100 text-black border rounded-r border-gray-400 border-t-0 border-b-0 border-r-0">
+          <div key={candidate.id} className="flex-1 md:flex md:flex-col bg-gray-100 text-black border rounded-r border-gray-400 sm:border-t-0 border-b-0 border-r-0 border-l-0 sm:border-l">
             <div className='flex items-center p-4'>
                 <img src={candidate.imageUrl} alt={candidate.name} className="w-16 h-16 rounded-md" />
                 <div className='flex flex-col p-2'>
