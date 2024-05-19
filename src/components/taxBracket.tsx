@@ -9,7 +9,7 @@ const TaxBracket: React.FC = () => {
                 Federal Tax Bracket Changes
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                If you're wondering why the your taxes for both candidates seems similar, it's because the tax bracket rates up to the $400,000(single) and $450,000(married) are the same for both presidents. 
+                If you're wondering why your taxes for both candidates seems similar, it's because the tax bracket rates up to the $400,000(single) and $450,000(married) are the same for both presidents. 
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-400">
               Biden's main change to the income tax policy is to change the top tax bracket rate to 39.6% for additional income over $400,000(single) and $450,000(married) as shown below.
