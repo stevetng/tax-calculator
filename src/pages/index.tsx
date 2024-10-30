@@ -16,6 +16,7 @@ interface UserInfo {
   dependents: number;
   students: number;
   zipCode: string;
+  childrenAges: number[]; // Add this new field
 }
 
 const Home: React.FC = () => {
@@ -26,6 +27,7 @@ const Home: React.FC = () => {
     dependents: 0,
     students: 0,
     zipCode: '',
+    childrenAges: [] // Add this new field
   });
 
   const handleUserInfoSubmit = (formValues: UserInfo) => {
