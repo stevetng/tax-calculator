@@ -7,6 +7,7 @@ interface UserInfo {
   dependents: number;
   students: number;
   filingStatus: "single" | "marriedFilingJointly";
+  childrenAges: number[]; // Add this new field
 }
 
 interface PolicyImpact {
@@ -21,6 +22,17 @@ interface Candidate {
   imageUrl: string;
   calculatePolicyImpact: (userInfo: UserInfo) => PolicyImpact;
 }
+
+interface ChildInfo {
+  age: number;
+  isNewborn: boolean;
+}
+
+// Add these constants at the top with other constants
+const NEWBORN_CREDIT = 6000;
+const UNDER_SIX_CREDIT = 3600;
+const OVER_SIX_CREDIT = 3000;
+const STANDARD_CREDIT = 2000; // Keep the existing credit for Trump's calculation
 
 const taxBrackets = {
     single: [
@@ -72,9 +84,9 @@ function calculateStandardTax(income: number, filingStatus: keyof typeof taxBrac
 const candidates: Candidate[] = [
   {
     id: 'biden',
-    name: 'Joe Biden',
-    title: '46th President of the United States',
-    imageUrl: 'biden_id.png',
+    name: 'Kamala Harris',
+    title: '46th Vice-President of the United States',
+    imageUrl: 'harris_id.png',
     calculatePolicyImpact: (userInfo: UserInfo) => calculateTaxImpact(userInfo, 'biden'),
   },
   {
@@ -118,8 +130,7 @@ const CandidateComparison: React.FC<{ userInfo: UserInfo }> = ({ userInfo }) => 
 
 
 function calculateTaxImpact(userInfo: UserInfo, candidate: string): PolicyImpact {
-  // Implement the tax calculation based on the TCJA and candidate specifics
-  const { filingStatus, income, dependents } = userInfo;
+  const { filingStatus, income, dependents, childrenAges } = userInfo;
   let taxImpact = 0;
   let childTaxCreditImpact = 0;
 
@@ -129,8 +140,8 @@ function calculateTaxImpact(userInfo: UserInfo, candidate: string): PolicyImpact
     taxImpact = calculateStandardTax(income, filingStatus);
   }
 
-  // Calculate Child Tax Credit
-  childTaxCreditImpact = calculateChildTaxCredit(income, dependents, filingStatus);
+  // Calculate Child Tax Credit with the new parameters
+  childTaxCreditImpact = calculateChildTaxCredit(income, dependents, filingStatus, candidate, childrenAges);
 
   return { taxImpact, childTaxCreditImpact };
 }
@@ -150,8 +161,33 @@ function calculateBidenHighIncomeTax(income: number, filingStatus: "single" | "m
     return tax;
 }
 
-function calculateChildTaxCredit(income: number, dependents: number, filingStatus: keyof typeof childTaxCreditPhaseoutStart): number {
-    let credit = dependents * childTaxCreditAmount;
+function calculateChildTaxCredit(
+    income: number, 
+    dependents: number, 
+    filingStatus: keyof typeof childTaxCreditPhaseoutStart,
+    candidate: string = 'trump',
+    childrenAges: number[] = []
+  ): number {
+    let credit = 0;
+
+    if (candidate === 'biden') {
+      // Calculate Harris's proposed credits
+      childrenAges.forEach(age => {
+        if (age === 0) {
+          // Newborn credit
+          credit += NEWBORN_CREDIT;
+        } else if (age < 6) {
+          // Under 6 credit
+          credit += UNDER_SIX_CREDIT;
+        } else {
+          // 6 and older credit
+          credit += OVER_SIX_CREDIT;
+        }
+      });
+    } else {
+      // Trump/Standard calculation
+      credit = dependents * STANDARD_CREDIT;
+    }
     const phaseoutThreshold = childTaxCreditPhaseoutStart[filingStatus];
     if (income > phaseoutThreshold) {
       // Implement the phaseout calculation

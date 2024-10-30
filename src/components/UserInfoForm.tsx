@@ -1,5 +1,6 @@
 // src/components/UserInfoForm.tsx
 import { useState, FormEvent } from 'react';
+import { useEffect } from 'react';
 
 interface UserInfo {
     filingStatus: "single" | "marriedFilingJointly";
@@ -8,6 +9,7 @@ interface UserInfo {
     dependents: number;
     students: number;
     zipCode: string;
+    childrenAges: number[]; // Add this new field
   }
 
 interface UserInfoFormProps {
@@ -27,6 +29,24 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
     const [dependents, setDependents] = useState<string>('');
     const [students, setStudents] = useState<string>('');
     const [zipCode, setZipCode] = useState<string>('');
+    const [childrenAges, setChildrenAges] = useState<string[]>([]);
+
+    const handleChildAgeChange = (index: number, value: string) => {
+        const newAges = [...childrenAges];
+        newAges[index] = value;
+        setChildrenAges(newAges);
+    };
+
+    // Update children ages array when dependents number changes
+    useEffect(() => {
+        const numDependents = Number(dependents) || 0;
+        setChildrenAges(prev => {
+            if (numDependents > prev.length) {
+                return [...prev, ...Array(numDependents - prev.length).fill('')];
+            }
+            return prev.slice(0, numDependents);
+        });
+    }, [dependents]);
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,6 +57,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
         dependents: Number(dependents),
         students: Number(students),
         zipCode: zipCode,
+        childrenAges: childrenAges.map(age => Number(age)),
         });
   };
 
@@ -110,9 +131,33 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
             className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
         </div>
-        
+        {/* Child Ages */}
+        {Number(dependents) > 0 && (
+            <div className="space-y-4">
+                <label className="block text-gray-700 text-sm font-semibold mb-2">
+                    Child Ages:
+                </label>
+                {Array.from({ length: Number(dependents) }).map((_, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                        <input
+                            type="number"
+                            value={childrenAges[index] || ''}
+                            onChange={(e) => handleChildAgeChange(index, e.target.value)}
+                            min="0"
+                            max="17"
+                            placeholder={`Age of child ${index + 1}`}
+                            required
+                            className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        />
+                        <span className="text-sm text-gray-500">
+                            {Number(childrenAges[index]) === 0 ? '(Newborn)' : ''}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        )}
         {/* Number of Students */}
-        <div>
+        {/* <div>
             <label htmlFor="students" className='block text-gray-700 text-sm font-semibold mb-2'>Students in College:</label>
             <input
             type="number"
@@ -124,7 +169,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({ onSubmit }) => {
             required
             className="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
-        </div>
+        </div> */}
         
         {/* Zip Code */}
         <div>
